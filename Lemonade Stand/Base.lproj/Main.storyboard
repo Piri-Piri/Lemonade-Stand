@@ -13,6 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="vZN-up-64s"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fYH-Yc-mmb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMD-ef-e1W">
@@ -278,6 +279,12 @@
                                     <rect key="frame" x="65" y="352" width="83" height="21"/>
                                 </variation>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NjT-gZ-RAb">
+                                <rect key="frame" x="29" y="78" width="60" height="55"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="19" y="49" width="80" height="65"/>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -350,11 +357,12 @@
                         <outlet property="moneyLabel" destination="OuP-MX-loh" id="aqA-ob-G1m"/>
                         <outlet property="purchaseIcecubesLabel" destination="TAf-hy-aa8" id="Rqs-Tl-yuO"/>
                         <outlet property="purchaseLemonsLabel" destination="uMv-kn-tbO" id="BZU-KF-oPZ"/>
+                        <outlet property="weatherImageView" destination="NjT-gZ-RAb" id="41b-qc-Da3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SCo-kQ-FRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="370.5" y="429"/>
+            <point key="canvasLocation" x="369" y="429"/>
         </scene>
     </scenes>
 </document>
