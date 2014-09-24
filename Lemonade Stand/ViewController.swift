@@ -30,7 +30,8 @@ class ViewController: UIViewController {
     var lemonsForMix = 0
     var icecubesForMix = 0
     
-    var weatherRange:[UIImage] = []
+    var weatherRange:[[Int]] = [[5, 9, 7, 4], [15, 11, 17, 13], [27, 21, 23, 26]]
+    var weatherToday:[Int] = [0, 0, 0, 0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +50,29 @@ class ViewController: UIViewController {
     // MARK: Helper Functions
     
     func setupWeather() {
-        weatherRange.append(UIImage(named: "Cold"))
-        weatherRange.append(UIImage(named: "Mild"))
-        weatherRange.append(UIImage(named: "Warm"))
+        let weatherIndex = Int(arc4random_uniform(UInt32(weatherRange.count)))
+        switch weatherIndex {
+        case 0: weatherImageView.image = UIImage(named: "Cold")
+        case 1: weatherImageView.image = UIImage(named: "Mild")
+        case 2: weatherImageView.image = UIImage(named: "Warm")
+        default: weatherImageView.image = UIImage(named: "")
+        }
+        println("WeatherIndex: \(weatherIndex)")
+        weatherToday = weatherRange[weatherIndex]
+    }
+    
+    func computeCustomerVisitForWeatherToday() -> Int {
+        return Int(arc4random_uniform(UInt32(computeAverage(weatherToday))))
+    }
+    
+    func computeAverage(data: [Int]) -> Int {
+        var sum = 0
+        
+        for x in data {
+            sum += x
+        }
+        println("Average: \(Int(ceil(Double(sum) / Double(data.count))))")
+        return Int(ceil(Double(sum) / Double(data.count)))
     }
     
     func updateMainView() {
@@ -88,24 +109,6 @@ class ViewController: UIViewController {
         
     }
     
-    func amountOfCustomersForWeatherHeatIndex() -> Int {
-        var weatherHeatIndex = Int(arc4random_uniform(UInt32(3)))
-        weatherImageView.image = weatherRange[weatherHeatIndex]
-        
-        println("WeatherHeatIndex: \(weatherHeatIndex)")
-        
-        switch weatherHeatIndex {
-        case 0:
-            return -3
-        case 1:
-            return 0
-        case 2:
-            return +4
-        default:
-            return 0
-        }
-    }
-    
     func computeRevenue() -> Int {
         var revenue = 0
         var customerRatio: Double
@@ -116,14 +119,9 @@ class ViewController: UIViewController {
             mixRatio = Double(lemonsForMix) / Double(icecubesForMix)
         }
         
-        var customers = Int(arc4random_uniform(UInt32(11)))
-        let amountCustomerDueWeather = amountOfCustomersForWeatherHeatIndex()
-        
-        println("Potential Customers: \(customers)")
-        if (customers + amountCustomerDueWeather) >= 0 {
-            customers = customers + amountCustomerDueWeather
-        }
-        println("Real Customers: \(customers) due weather.")
+        let customers = computeCustomerVisitForWeatherToday()
+        println("Customers: \(customers)")
+
         for var i = 0; i < customers; i++ {
             customerRatio = Double(arc4random_uniform(UInt32(101))) / 100
             
